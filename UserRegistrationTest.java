@@ -7,22 +7,22 @@ public class UserRegistrationTest {
     UserRegistration userRegistration = new UserRegistration();
 
     @Test
-    void testValidFirstName() {
-        assertTrue(userRegistration.validateFirstName("John"));
+    void testValidLastName() {
+        assertTrue(userRegistration.validateLastName("Doe"));
     }
 
     @Test
-    void testInvalidShortFirstName() {
-        assertFalse(userRegistration.validateFirstName("Jo"));
+    void testInvalidShortLastName() {
+        assertFalse(userRegistration.validateLastName("De"));
     }
 
     @Test
-    void testInvalidLowerCaseFirstName() {
-        assertFalse(userRegistration.validateFirstName("john"));
+    void testInvalidLowerCaseLastName() {
+        assertFalse(userRegistration.validateLastName("doe"));
     }
 
     @Test
-    void testInvalidNumericFirstName() {
-        assertFalse(userRegistration.validateFirstName("John123"));
+    void testInvalidNumericLastName() {
+        assertFalse(userRegistration.validateLastName("Doe123"));
     }
 }

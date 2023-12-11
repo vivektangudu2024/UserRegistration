@@ -10,11 +10,15 @@ public class UserRegistrationMain {
         System.out.print("Enter the first name: ");
         String firstName = scanner.nextLine();
 
-        if (userRegistration.validateFirstName(firstName)) {
-            System.out.println("Valid first name!");
+        System.out.print("Enter the last name: ");
+        String lastName = scanner.nextLine();
+
+        if (userRegistration.validateFirstName(firstName) && userRegistration.validateLastName(lastName)) {
+            System.out.println("Valid first and last names!");
         } else {
-            System.out.println("Invalid first name!");
+            System.out.println("Invalid first or last name!");
         }
 
         scanner.close();
+    }
 }
