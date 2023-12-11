@@ -7,22 +7,27 @@ public class UserRegistrationTest {
     UserRegistration userRegistration = new UserRegistration();
 
     @Test
-    void testValidLastName() {
-        assertTrue(userRegistration.validateLastName("Doe"));
+    void testValidEmail() {
+        assertTrue(userRegistration.validateEmail("abc.xyz@bl.co.in"));
     }
 
     @Test
-    void testInvalidShortLastName() {
-        assertFalse(userRegistration.validateLastName("De"));
+    void testInvalidEmailNoAtSymbol() {
+        assertFalse(userRegistration.validateEmail("abc.xyzbl.co.in"));
     }
 
     @Test
-    void testInvalidLowerCaseLastName() {
-        assertFalse(userRegistration.validateLastName("doe"));
+    void testInvalidEmailNoDotAfterAtSymbol() {
+        assertFalse(userRegistration.validateEmail("abc.xyz@blcoin"));
     }
 
     @Test
-    void testInvalidNumericLastName() {
-        assertFalse(userRegistration.validateLastName("Doe123"));
+    void testInvalidEmailNoDomain() {
+        assertFalse(userRegistration.validateEmail("abc.xyz@.in"));
+    }
+
+    @Test
+    void testInvalidEmailNoTopLevelDomain() {
+        assertFalse(userRegistration.validateEmail("abc.xyz@bl.co"));
     }
 }
