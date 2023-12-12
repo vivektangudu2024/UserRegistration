@@ -6,27 +6,23 @@ public class UserRegistrationMain {
     public static void main(String[] args) {
         UserRegistration userRegistration = new UserRegistration();
 
-        // Example usage for validating passwords
-        String password1 = "AbcdEfgh";
-        String password2 = "abcdefgh";
-        String password3 = "AbcdEfg";
+        // Valid emails
+        String validEmail1 = "abc.xyz@bl.co.in";
+        String validEmail2 = "john.doe@example.com";
+        String validEmail3 = "user123@email.co";
 
-        if (userRegistration.isValidPassword(password1)) {
-            System.out.println("Password1 is valid!");
-        } else {
-            System.out.println("Password1 is invalid!");
-        }
+        // Invalid emails
+        String invalidEmail1 = "invalid-email";
+        String invalidEmail2 = "user@.com";
+        String invalidEmail3 = "user123@com";
 
-        if (userRegistration.isValidPassword(password2)) {
-            System.out.println("Password2 is valid!");
-        } else {
-            System.out.println("Password2 is invalid!");
-        }
+        // Test cases
+        System.out.println("Is Valid Email 1: " + userRegistration.validateEmail(validEmail1));
+        System.out.println("Is Valid Email 2: " + userRegistration.validateEmail(validEmail2));
+        System.out.println("Is Valid Email 3: " + userRegistration.validateEmail(validEmail3));
 
-        if (userRegistration.isValidPassword(password3)) {
-            System.out.println("Password3 is valid!");
-        } else {
-            System.out.println("Password3 is invalid!");
-        }
+        System.out.println("Is Invalid Email 1: " + userRegistration.validateEmail(invalidEmail1));
+        System.out.println("Is Invalid Email 2: " + userRegistration.validateEmail(invalidEmail2));
+        System.out.println("Is Invalid Email 3: " + userRegistration.validateEmail(invalidEmail3));
     }
 }

@@ -58,5 +58,41 @@ public class UserRegistrationTest {
         assertFalse(userRegistration.isValidPassword(invalidPassword));
     }
 
+    @Test
+    public void testValidEmail1() {
+        String validEmail = "abc.xyz@bl.co.in";
+        assertTrue(userRegistration.validateEmail(validEmail));
+    }
+
+    @Test
+    public void testValidEmail2() {
+        String validEmail = "john.doe@example.com";
+        assertTrue(userRegistration.validateEmail(validEmail));
+    }
+
+    @Test
+    public void testValidEmail3() {
+        String validEmail = "user123@email.co";
+        assertTrue(userRegistration.validateEmail(validEmail));
+    }
+
+    @Test
+    public void testInvalidEmail1() {
+        String invalidEmail = "invalid-email";
+        assertFalse(userRegistration.validateEmail(invalidEmail));
+    }
+
+    @Test
+    public void testInvalidEmail2() {
+        String invalidEmail = "user@.com";
+        assertFalse(userRegistration.validateEmail(invalidEmail));
+    }
+
+    @Test
+    public void testInvalidEmail3() {
+        String invalidEmail = "user123@com";
+        assertFalse(userRegistration.validateEmail(invalidEmail));
+    }
+
 
 }
