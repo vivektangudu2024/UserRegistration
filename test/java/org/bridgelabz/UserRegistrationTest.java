@@ -64,6 +64,16 @@ public class UserRegistrationTest {
     public void testInvalidPassword() {
         assertFalse(userRegistration.isValidPassword("invalidpassword"));
     }
+    @ParameterizedTest
+    @ValueSource(strings = { "abcd.xyz@bl.co.in", "test.email@gmail.com", "user@domain.com" })
+    void testValidEmailAddresses(String email) {
+        assertTrue(user.isValidEmail(email));
+    }
 
+    @ParameterizedTest
+    @ValueSource(strings = { "invalid.email@com", "user@domain", "another.email" })
+    void testInvalidEmailAddresses(String email) {
+        assertFalse(user.isValidEmail(email));
+    }
 
 }
