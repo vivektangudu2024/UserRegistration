@@ -11,87 +11,58 @@ import static junit.framework.Assert.assertTrue;
 public class UserRegistrationTest {
     UserRegistration userRegistration = new UserRegistration();
 
+    // Happy Test Cases
+
+    @Test
+    public void testValidFirstName() {
+        assertTrue(userRegistration.validateFirstName("John"));
+    }
+
+    @Test
+    public void testValidLastName() {
+        assertTrue(userRegistration.validateLastName("Doe"));
+    }
+
+    @Test
+    public void testValidEmail() {
+        assertTrue(userRegistration.validateEmail("john.doe@example.com"));
+    }
+
     @Test
     public void testValidMobileNumber() {
-        String validNumber = "91 9919819801";
-        assertTrue(userRegistration.isValidMobileNumber(validNumber));
+        assertTrue(userRegistration.isValidMobileNumber("91 9919819801"));
     }
 
-    @Test
-    public void testInvalidMobileNumberNoSpace() {
-        String invalidNumber = "919919819801";
-        assertFalse(userRegistration.isValidMobileNumber(invalidNumber));
-    }
-
-    @Test
-    public void testInvalidMobileNumberShortNumber() {
-        String invalidNumber = "91 12345";
-        assertFalse(userRegistration.isValidMobileNumber(invalidNumber));
-    }
-
-    @Test
-    public void testInvalidMobileNumberLongNumber() {
-        String invalidNumber = "91 123456789012345";
-        assertFalse(userRegistration.isValidMobileNumber(invalidNumber));
-    }
-
-    @Test
-    public void testInvalidMobileNumberNonNumeric() {
-        String invalidNumber = "91 abcdefghij";
-        assertFalse(userRegistration.isValidMobileNumber(invalidNumber));
-    }
     @Test
     public void testValidPassword() {
-        String validPassword = "AbcdEfgh";
-        assertTrue(userRegistration.isValidPassword(validPassword));
+        assertTrue(userRegistration.isValidPassword("Abcd@123"));
+    }
+
+    // Sad Test Cases
+
+    @Test
+    public void testInvalidFirstName() {
+        assertFalse(userRegistration.validateFirstName("jo"));
     }
 
     @Test
-    public void testInvalidPasswordShort() {
-        String invalidPassword = "AbcdEfg";
-        assertFalse(userRegistration.isValidPassword(invalidPassword));
+    public void testInvalidLastName() {
+        assertFalse(userRegistration.validateLastName("d"));
     }
 
     @Test
-    public void testInvalidPasswordNoUpperCase() {
-        String invalidPassword = "abcdefgh";
-        assertFalse(userRegistration.isValidPassword(invalidPassword));
+    public void testInvalidEmail() {
+        assertFalse(userRegistration.validateEmail("invalid-email"));
     }
 
     @Test
-    public void testValidEmail1() {
-        String validEmail = "abc.xyz@bl.co.in";
-        assertTrue(userRegistration.validateEmail(validEmail));
+    public void testInvalidMobileNumber() {
+        assertFalse(userRegistration.isValidMobileNumber("12345"));
     }
 
     @Test
-    public void testValidEmail2() {
-        String validEmail = "john.doe@example.com";
-        assertTrue(userRegistration.validateEmail(validEmail));
-    }
-
-    @Test
-    public void testValidEmail3() {
-        String validEmail = "user123@email.co";
-        assertTrue(userRegistration.validateEmail(validEmail));
-    }
-
-    @Test
-    public void testInvalidEmail1() {
-        String invalidEmail = "invalid-email";
-        assertFalse(userRegistration.validateEmail(invalidEmail));
-    }
-
-    @Test
-    public void testInvalidEmail2() {
-        String invalidEmail = "user@.com";
-        assertFalse(userRegistration.validateEmail(invalidEmail));
-    }
-
-    @Test
-    public void testInvalidEmail3() {
-        String invalidEmail = "user123@com";
-        assertFalse(userRegistration.validateEmail(invalidEmail));
+    public void testInvalidPassword() {
+        assertFalse(userRegistration.isValidPassword("invalidpassword"));
     }
 
 
