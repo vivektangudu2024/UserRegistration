@@ -40,5 +40,23 @@ public class UserRegistrationTest {
         String invalidNumber = "91 abcdefghij";
         assertFalse(userRegistration.isValidMobileNumber(invalidNumber));
     }
+    @Test
+    public void testValidPassword() {
+        String validPassword = "AbcdEfgh";
+        assertTrue(userRegistration.isValidPassword(validPassword));
+    }
+
+    @Test
+    public void testInvalidPasswordShort() {
+        String invalidPassword = "AbcdEfg";
+        assertFalse(userRegistration.isValidPassword(invalidPassword));
+    }
+
+    @Test
+    public void testInvalidPasswordNoUpperCase() {
+        String invalidPassword = "abcdefgh";
+        assertFalse(userRegistration.isValidPassword(invalidPassword));
+    }
+
 
 }

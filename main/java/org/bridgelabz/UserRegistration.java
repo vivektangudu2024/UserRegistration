@@ -7,32 +7,40 @@ public class UserRegistration {
     private static final String NAME_REGEX = "^[A-Z][a-zA-Z]{2,}$";
 
     private static final String EMAIL_REGEX = "^[a-zA-Z0-9]+([.+-]?[a-zA-Z0-9]+)*@[a-zA-Z0-9]+\\.[a-zA-Z]{2,}([.][a-zA-Z]{2})?$";
+
+    private static final String MOBILE_NUMBER_REGEX = "^\\d{2} \\d{10}$";
+
+    private static final String PASSWORD_REGEX = "^(?=.*[A-Z]).{8,}$";
+
     /*
      * @desc:checks whether the first name is valid or not
      * @params:string
-     * @return:none
+     * @return:true if the first name is valid, false otherwise.
      */
     public boolean validateFirstName(String firstName) {
         return validateName(firstName);
     }
+
     /*
      * @desc:checks whether the last name is valid or not
      * @params:string
-     * @return:none
+     * @return:true if the last name is valid, false otherwise.
      */
     public boolean validateLastName(String lastName) {
         return validateName(lastName);
     }
+
     /*
      * @desc:checks whether the name is valid or not
      * @params:string
-     * @return:none
+     * @return:true if the name is valid, false otherwise.
      */
     private boolean validateName(String name) {
         Pattern pattern = Pattern.compile(NAME_REGEX);
         Matcher matcher = pattern.matcher(name);
         return matcher.matches();
     }
+
     /*
      * @desc:Validates the entered email based on specified criteria.
      * @param: email The email to be validated.
@@ -50,16 +58,20 @@ public class UserRegistration {
      * @return true if the email is valid, false otherwise.
      */
     public boolean isValidMobileNumber(String mobileNumber) {
-        // Define the regex pattern for the mobile number format
-        String regex = "^\\d{2} \\d{10}$";
-
-        // Create a Pattern object
-        Pattern pattern = Pattern.compile(regex);
-
-        // Create a Matcher object
+        Pattern pattern = Pattern.compile(MOBILE_NUMBER_REGEX);
         Matcher matcher = pattern.matcher(mobileNumber);
+        return matcher.matches();
+    }
 
-        // Check if the input matches the pattern
+    /*
+     * @desc:Validates the entered password based on specified criteria.
+     * Rule1 – minimum 8 Characters, at least one uppercase letter.
+     * @param: password The password to be validated.
+     * @return: true if the password is valid, false otherwise.
+     */
+    public boolean isValidPassword(String password) {
+        Pattern pattern = Pattern.compile(PASSWORD_REGEX);
+        Matcher matcher = pattern.matcher(password);
         return matcher.matches();
     }
 }
