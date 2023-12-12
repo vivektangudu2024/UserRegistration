@@ -7,7 +7,7 @@ public class UserRegistration {
     private static final String NAME_REGEX = "^[A-Z][a-zA-Z]{2,}$";
     private static final String EMAIL_REGEX = "^[a-zA-Z0-9]+([.+-]?[a-zA-Z0-9]+)*@[a-zA-Z0-9]+\\.[a-zA-Z]{2,}([.][a-zA-Z]{2})?$";
     private static final String MOBILE_NUMBER_REGEX = "^\\d{2} \\d{10}$";
-    private static final String PASSWORD_REGEX = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d).{8,}$";
+    private static final String PASSWORD_REGEX = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@#$%^&+=]).{8,}$";
 
     /*
      * @desc:checks whether the first name is valid or not
@@ -62,7 +62,7 @@ public class UserRegistration {
 
     /*
      * @desc:Validates the entered password based on specified criteria.
-     * Rule1 – minimum 8 Characters, Rule2 – Should have at least 1 Upper Case, Rule 3
+     * Rule1 – minimum 8 Characters, Rule2 – Should have at least 1 Upper Case, Rule 3, Rule 4
      * @param: password The password to be validated.
      * @return: true if the password is valid, false otherwise.
      */
