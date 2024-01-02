@@ -2,6 +2,7 @@ package org.bridgelabz;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import org.bridgelabz.exceptions.*;
 
 public class UserRegistration {
     private static final String NAME_REGEX = "^[A-Z][a-zA-Z]{2,}$";
@@ -9,64 +10,55 @@ public class UserRegistration {
     private static final String MOBILE_NUMBER_REGEX = "^\\d{2} \\d{10}$";
     private static final String PASSWORD_REGEX = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d)(?=.*[@#$%^&+=]).{8,}$";
 
-    /*
-     * @desc:checks whether the first name is valid or not
-     * @params:string
-     * @return:true if the first name is valid, false otherwise.
-     */
-    public boolean validateFirstName(String firstName) {
-        return validateName(firstName);
+    public void validateFirstName(String firstName) throws InvalidFirstNameException {
+        if (!validateName(firstName)) {
+            throw new InvalidFirstNameException("Invalid First Name");
+        }
     }
 
-    /*
-     * @desc:checks whether the last name is valid or not
-     * @params:string
-     * @return:true if the last name is valid, false otherwise.
-     */
-    public boolean validateLastName(String lastName) {
-        return validateName(lastName);
+    public void validateLastName(String lastName) throws InvalidLastNameException {
+        if (!validateName(lastName)) {
+            throw new InvalidLastNameException("Invalid Last Name");
+        }
     }
 
-    /*
-     * @desc:checks whether the name is valid or not
-     * @params:string
-     * @return:true if the name is valid, false otherwise.
-     */
+    public void validateEmail(String email) throws InvalidEmailException {
+        if (!validateEmailPattern(email)) {
+            throw new InvalidEmailException("Invalid Email");
+        }
+    }
+
+    public void isValidMobileNumber(String mobileNumber) throws InvalidMobileNumberException {
+        if (!validateMobileNumberPattern(mobileNumber)) {
+            throw new InvalidMobileNumberException("Invalid Mobile Number");
+        }
+    }
+
+    public void isValidPassword(String password) throws InvalidPasswordException {
+        if (!validatePasswordPattern(password)) {
+            throw new InvalidPasswordException("Invalid Password");
+        }
+    }
+
     private boolean validateName(String name) {
         Pattern pattern = Pattern.compile(NAME_REGEX);
         Matcher matcher = pattern.matcher(name);
         return matcher.matches();
     }
 
-    /*
-     * @desc:Validates the entered email based on specified criteria.
-     * @param: email The email to be validated.
-     * @return: true if the email is valid, false otherwise.
-     */
-    public boolean validateEmail(String email) {
+    private boolean validateEmailPattern(String email) {
         Pattern pattern = Pattern.compile(EMAIL_REGEX);
         Matcher matcher = pattern.matcher(email);
         return matcher.matches();
     }
 
-    /*
-     * @desc:Validates the entered phone number based on specified criteria.
-     * @param THE phone number to be validated.
-     * @return true if the email is valid, false otherwise.
-     */
-    public boolean isValidMobileNumber(String mobileNumber) {
+    private boolean validateMobileNumberPattern(String mobileNumber) {
         Pattern pattern = Pattern.compile(MOBILE_NUMBER_REGEX);
         Matcher matcher = pattern.matcher(mobileNumber);
         return matcher.matches();
     }
 
-    /*
-     * @desc:Validates the entered password based on specified criteria.
-     * Rule1 – minimum 8 Characters, Rule2 – Should have at least 1 Upper Case, Rule 3, Rule 4
-     * @param: password The password to be validated.
-     * @return: true if the password is valid, false otherwise.
-     */
-    public boolean isValidPassword(String password) {
+    private boolean validatePasswordPattern(String password) {
         Pattern pattern = Pattern.compile(PASSWORD_REGEX);
         Matcher matcher = pattern.matcher(password);
         return matcher.matches();

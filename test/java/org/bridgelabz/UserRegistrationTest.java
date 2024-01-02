@@ -1,79 +1,91 @@
 package org.bridgelabz;
 
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
+import org.bridgelabz.exceptions.*;
 
-
-import org.junit.Test;
-
-import static junit.framework.Assert.assertFalse;
-import static junit.framework.Assert.assertTrue;
-
-
-public class UserRegistrationTest {
+class UserRegistrationTest {
     UserRegistration userRegistration = new UserRegistration();
 
     // Happy Test Cases
 
     @Test
-    public void testValidFirstName() {
-        assertTrue(userRegistration.validateFirstName("John"));
+    void testValidFirstName() {
+        Assertions.assertDoesNotThrow(() -> userRegistration.validateFirstName("John"));
     }
 
     @Test
-    public void testValidLastName() {
-        assertTrue(userRegistration.validateLastName("Doe"));
+    void testValidLastName() {
+        Assertions.assertDoesNotThrow(() -> userRegistration.validateLastName("Doe"));
     }
 
     @Test
-    public void testValidEmail() {
-        assertTrue(userRegistration.validateEmail("john.doe@example.com"));
+    void testValidEmail() {
+        Assertions.assertDoesNotThrow(() -> userRegistration.validateEmail("john.doe@example.com"));
     }
 
     @Test
-    public void testValidMobileNumber() {
-        assertTrue(userRegistration.isValidMobileNumber("91 9919819801"));
+    void testValidMobileNumber() {
+        Assertions.assertDoesNotThrow(() -> userRegistration.isValidMobileNumber("91 9919819801"));
     }
 
     @Test
-    public void testValidPassword() {
-        assertTrue(userRegistration.isValidPassword("Abcd@123"));
+    void testValidPassword() {
+        Assertions.assertDoesNotThrow(() -> userRegistration.isValidPassword("Abcd@123"));
     }
 
     // Sad Test Cases
 
     @Test
-    public void testInvalidFirstName() {
-        assertFalse(userRegistration.validateFirstName("jo"));
+    void testInvalidFirstName() {
+        InvalidFirstNameException exception = Assertions.assertThrows(InvalidFirstNameException.class,
+                () -> userRegistration.validateFirstName("jo"));
+        Assertions.assertEquals("Invalid First Name", exception.getMessage());
     }
 
     @Test
-    public void testInvalidLastName() {
-        assertFalse(userRegistration.validateLastName("d"));
+    void testInvalidLastName() {
+        InvalidLastNameException exception = Assertions.assertThrows(InvalidLastNameException.class,
+                () -> userRegistration.validateLastName("d"));
+        Assertions.assertEquals("Invalid Last Name", exception.getMessage());
     }
 
     @Test
-    public void testInvalidEmail() {
-        assertFalse(userRegistration.validateEmail("invalid-email"));
+    void testInvalidEmail() {
+        InvalidEmailException exception = Assertions.assertThrows(InvalidEmailException.class,
+                () -> userRegistration.validateEmail("invalid-email"));
+        Assertions.assertEquals("Invalid Email", exception.getMessage());
     }
 
     @Test
-    public void testInvalidMobileNumber() {
-        assertFalse(userRegistration.isValidMobileNumber("12345"));
+    void testInvalidMobileNumber() {
+        InvalidMobileNumberException exception = Assertions.assertThrows(InvalidMobileNumberException.class,
+                () -> userRegistration.isValidMobileNumber("12345"));
+        Assertions.assertEquals("Invalid Mobile Number", exception.getMessage());
     }
 
     @Test
-    public void testInvalidPassword() {
-        assertFalse(userRegistration.isValidPassword("invalidpassword"));
+    void testInvalidPassword() {
+        InvalidPasswordException exception = Assertions.assertThrows(InvalidPasswordException.class,
+                () -> userRegistration.isValidPassword("invalidpassword"));
+        Assertions.assertEquals("Invalid Password", exception.getMessage());
     }
+
+    // Parameterized Tests
+
     @ParameterizedTest
-    @ValueSource(strings = { "abcd.xyz@bl.co.in", "test.email@gmail.com", "user@domain.com" })
+    @ValueSource(strings = {"abcd.xyz@bl.co.in", "test.email@gmail.com", "user@domain.com"})
     void testValidEmailAddresses(String email) {
-        assertTrue(user.isValidEmail(email));
+        Assertions.assertDoesNotThrow(() -> userRegistration.validateEmail(email));
     }
 
     @ParameterizedTest
-    @ValueSource(strings = { "invalid.email@com", "user@domain", "another.email" })
+    @ValueSource(strings = {"invalid.email@com", "user@domain", "another.email"})
     void testInvalidEmailAddresses(String email) {
-        assertFalse(user.isValidEmail(email));
+        InvalidEmailException exception = Assertions.assertThrows(InvalidEmailException.class,
+                () -> userRegistration.validateEmail(email));
+        Assertions.assertEquals("Invalid Email", exception.getMessage());
     }
-
 }
